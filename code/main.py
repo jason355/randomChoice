@@ -1,14 +1,25 @@
 import random
 import time
 
-stuQuan = int(input("Enter student's quantity> "))
-
+c = 0
 k = 0
 q = 0
 r = 0
 w = 0
-v = stuQuan - 1
 knum = None
+condition = True
+
+while c < 1:
+    try:
+        stuQuan = int(input("Enter student's quantity> "))
+        break
+    except KeyboardInterrupt:
+        print("Good bye~")
+    except ValueError:
+        print("Please enter a number, not words or Null.")
+
+v = stuQuan - 1
+
 while knum == None:
     try:
         knum = int(input("Enter the quantity of the number or press ctrl^C to skip.> "))
@@ -34,17 +45,46 @@ data = [0] * stuQuan
 
 while k < knum:
     try:
-        known[k][0] = int(input("Enter a student number> "))
-        known[k][1] = int(input("Enter it's queue> "))
-        if known[k][0] not in known or known[k][1] not in known:
-            if known[k][1] < stuQuan:
+        tempA = int(input("Enter a student number> "))
+        while condition == True:
+            if c + 1 == knum:
+                c = 0
+                break
+            if tempA == known[c][0]:
+                c = 0
+                condition = False 
+            c += 1
+        tempB = int(input("Enter it's queue> "))
+        while condition == True:
+            if c+1 == knum:
+                c = 0
+                break 
+            if tempB == known[c][1] or tempB > stuQuan:
+                condition = False
+            c += 1
+        if condition == False:
+            print(f"Error: {tempA} or {tempB} get two or {tempB} > {stuQuan}. Please Check again.")
+            condition = True
+        else:
+            known[k][0] = tempA
+            known[k][1] = tempB
+            k += 1
+            
+        """ 
+        if (tempA not in known) and (tempB not in known):
+            if tempB < stuQuan:
+                known[k][0] = tempA
+                known[k][1] = tempB
                 k += 1
+                
             else:
                 print(f"Please enter a quene that is smaller than {stuQuan}")
         else:
-            print("Please enter a different student number or a different queue.")
+            print("Please enter a different student number or a different queue.") """
     except ValueError:
         print("Please enter a number, not words or Null.")
+    except KeyboardInterrupt:
+        print("Please enter student number and queue.")
 
 for n in range(knum):
     #if known[k][0] not in data:
@@ -68,7 +108,7 @@ for l in range(stuQuan):
         note[l][1] = l
     elif data[l] != 0:
         note[data[l]-1][0] = None
-print(note)
+#print(note)
 while q < stuQuan:
     if note[q][0] != None: #and note[q][1] == None:
         nnote[w] = note[q][0]
@@ -91,7 +131,9 @@ for e in range((stuQuan - knum)):
     data[note[e][1]] = random.choice(nnote)
     del nnote[nnote.index(data[note[e][1]])]
     
-print(data)
+for t in range(stuQuan):
+    print(f"第{t + 1}個: {data[t]}")
+
 print("")
 print("Enter ctrl^c to end program.")
 m = 1
