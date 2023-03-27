@@ -11,24 +11,24 @@ condition = True
 
 while c < 1:
     try:
-        stuQuan = int(input("Enter student's quantity> "))
+        stuQuan = int(input("輸入學生數> "))
         break
     except KeyboardInterrupt:
         print("Good bye~")
     except ValueError:
-        print("Please enter a number, not words or Null.")
+        print("請輸入數值，不接受文字、空值")
 
 v = stuQuan - 1
 
 while knum == None:
     try:
-        knum = int(input("Enter the quantity of the number or press ctrl^C to skip.> "))
+        knum = int(input("輸入挑過學生數量，如無須跳過，按 ctrl^c> "))
         break
     except ValueError:
-        print("Pleast enter quantity not words or Null.")
+        print("請輸入數值，不接受文字、空值")
     except KeyboardInterrupt:
         print("")
-        print("No known number.")
+        print("無須跳過")
         knum = 0
         break
 
@@ -45,7 +45,7 @@ data = [0] * stuQuan
 
 while k < knum:
     try:
-        tempA = int(input("Enter a student number> "))
+        tempA = int(input(f"輸入跳過學生之號碼> "))
         while condition == True:
             if c + 1 == knum:
                 c = 0
@@ -54,7 +54,7 @@ while k < knum:
                 c = 0
                 condition = False 
             c += 1
-        tempB = int(input("Enter it's queue> "))
+        tempB = int(input(f"輸入{tempA}號之順序> "))
         while condition == True:
             if c+1 == knum:
                 c = 0
@@ -70,38 +70,13 @@ while k < knum:
             known[k][1] = tempB
             k += 1
             
-        """ 
-        if (tempA not in known) and (tempB not in known):
-            if tempB < stuQuan:
-                known[k][0] = tempA
-                known[k][1] = tempB
-                k += 1
-                
-            else:
-                print(f"Please enter a quene that is smaller than {stuQuan}")
-        else:
-            print("Please enter a different student number or a different queue.") """
     except ValueError:
-        print("Please enter a number, not words or Null.")
+        print("請輸入數值，不接受文字、空值")
     except KeyboardInterrupt:
-        print("Please enter student number and queue.")
+        print("請輸入數值")
 
 for n in range(knum):
-    #if known[k][0] not in data:
-        #if known[k][1] not in data[range(stuQuan)]:
-            #if known[k][1] < stuQuan:
-                data[known[n][1] - 1] = known[n][0] 
-            #else:
-                #print(f"Error 003: Queue {known[k][1]} out of range. Please enter a queue that smaller than {stuQuan}")
-                #known[k][1] = int(input(f"Enter a new queue for student {known[k][0]} that is smaller than {stuQuan}> "))
-        #else:
-            #print(f"Error 002: Queue {known[k][1]} has two number. Please check again.")
-            #known[k][1] = int(input(f"Enter a new queue for student {known[k][0]}"))
-    #else:
-        #print(f"Error 001: Number {known[k][0]} has been in {known[k][1]}. Please check again.")
-        #known[k][0] = int(input("Enter a new student number> "))
-        #known[k][1] = int(input("Enter a new queue> "))
-
+    data[known[n][1] - 1] = known[n][0] 
 
 for l in range(stuQuan):
     if data[l] == 0 :
@@ -132,10 +107,10 @@ for e in range((stuQuan - knum)):
     del nnote[nnote.index(data[note[e][1]])]
     
 for t in range(stuQuan):
-    print(f"第{t + 1}個: {data[t]}")
+    print(f"第{t + 1}個: {data[t]} 號")
 
 print("")
-print("Enter ctrl^c to end program.")
+print("按 ctrl^c 結束程式")
 m = 1
 
 while m > 0:
