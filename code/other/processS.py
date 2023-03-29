@@ -111,7 +111,7 @@ def process(count):
         print(f"第{t + 1}次:({date[t]})", end='\n')
         while d < 8:
             print(f"    第{d + 1}個:{data[f]}")
-            #time.sleep(1)
+            time.sleep(1)
             d += 1
             f += 1
     d = 0
@@ -119,7 +119,7 @@ def process(count):
     print(f"第{t+2}次({date[4]}):")
     for r in range(7):
         print(f"    第{d + 1}個: {data[f]}")
-        #time.sleep(1)
+        time.sleep(1)
         f += 1
         d += 1
 
